@@ -1,14 +1,15 @@
 <template>
   <div class="drinkDetails col my-4" :id="details.replace(/\s+/g, '')">
   {{this.detailsList.strDrink}}
+    <!-- displaying just the first item in case if it returns one. Nice way would be using lodash -->
     <div v-for="detail in this.detailsList.slice(0,1)" :key="detail.idDrink" class="single-detail">
       <div v-if="detail.strDrink">
           <h3 v-if="details">{{details}}</h3>
-          <!-- <h4>Length: {{this.detailsList.length}}</h4> -->
           <img :src="detail.strDrinkThumb" alt="drink image">
           <div class="content">
             <p><strong>Instructions:</strong> {{detail.strInstructions}}</p>
             <strong>Ingredients:</strong> 
+            <!-- assuming every item has atleast 15 ingredients -->
             <div class="ingredients" v-for='index in 15' :key='index'>
                 <p v-if="detail['strIngredient' + index]">{{detail['strIngredient' + index]}}</p>
             </div>

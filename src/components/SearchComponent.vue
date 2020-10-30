@@ -9,14 +9,12 @@
             </b-card-header>
             <b-collapse :id="'accordion-' + category.replace(/\s+/g, '')" visible accordion="my-accordion" role="tabpanel" v-model="visible">
             <b-card-body>
-                <!-- {{getDrinksByCategory(category)}} -->
                     <section v-if="errored">
                         <p>We're sorry, we're not able to retrieve this information at the moment, please try back later</p>
                     </section>
                     <section v-else>
                         <div v-if="loading">Loading...</div>
                         <div v-else class="row">
-                            
                             <div v-for="result in results" :key="result.index" class="col col-4" :id="result.strDrink.replace(/\s+/g, '')">
                                 <ul class="list-group" v-if="!details">
                                     <li class="list-group-item">
@@ -25,13 +23,8 @@
                                         </router-link>
                                     </li>
                                 </ul>
-                                <!-- <p>ID: {{result.idDrink}} </p> -->
-                                <!-- <img v-bind:src="result.strDrinkThumb"> -->
-                                
                                     <DrinkDetails v-if="details" :details = "result.strDrink" @open-collapse='openCollapse'/>
-                                
                             </div>
-                            
                         </div>
                     </section>
             </b-card-body>
@@ -54,11 +47,6 @@ export default {
       
     }
   },
-  // filters:{
-  //   removeSpaces: function(string){
-  //     return string.replace(/\s+/g, '')
-  //   }
-  // },
   props: ['category', 'details'],
   mounted () {
     this.getDrinksByCategory();
