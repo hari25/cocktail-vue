@@ -1,6 +1,6 @@
 <template>
   <div class="cocktail">
-    <h1>Welcome to the CockTail app built using Vue CLI</h1>
+    <h1>Welcome to the CockTail app built using Vue </h1>
   </div> 
 </template>
 

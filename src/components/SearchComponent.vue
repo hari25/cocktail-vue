@@ -28,7 +28,7 @@
                                 <!-- <p>ID: {{result.idDrink}} </p> -->
                                 <!-- <img v-bind:src="result.strDrinkThumb"> -->
                                 
-                                    <DrinkDetails v-if="details" :details = "result.strDrink" :search="search" @open-collapse='openCollapse'/>
+                                    <DrinkDetails v-if="details" :details = "result.strDrink" @open-collapse='openCollapse'/>
                                 
                             </div>
                             
@@ -59,7 +59,7 @@ export default {
   //     return string.replace(/\s+/g, '')
   //   }
   // },
-  props: ['category', 'details', 'search'],
+  props: ['category', 'details'],
   mounted () {
     this.getDrinksByCategory();
   },

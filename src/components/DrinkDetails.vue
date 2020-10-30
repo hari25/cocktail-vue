@@ -1,10 +1,10 @@
 <template>
   <div class="drinkDetails col my-4" :id="details.replace(/\s+/g, '')">
-  {{filteredList.strDrink}}
-    <div v-for="detail in filteredList.slice(0,1)" :key="detail.idDrink" class="single-detail">
+  {{this.detailsList.strDrink}}
+    <div v-for="detail in this.detailsList.slice(0,1)" :key="detail.idDrink" class="single-detail">
       <div v-if="detail.strDrink">
           <h3 v-if="details">{{details}}</h3>
-          <h4>Length: {{filteredList.length}}</h4>
+          <!-- <h4>Length: {{this.detailsList.length}}</h4> -->
           <img :src="detail.strDrinkThumb" alt="drink image">
           <div class="content">
             <p><strong>Instructions:</strong> {{detail.strInstructions}}</p>
@@ -29,7 +29,7 @@ export default {
       detailsList: [],
     }
   },
-  props: ['details', 'search'],
+  props: ['details'],
   watch: { 
     search: function(newVal, oldVal) { // watch it
       console.log('Prop changed: ', newVal, ' | was: ', oldVal)
@@ -46,7 +46,7 @@ export default {
     let el = window.location.href.split("/#/drink#")[1];
     if(el){
       setTimeout(function(){ 
-        document.getElementById(el).scrollIntoView(); }, 3000);
+        document.getElementById(el).scrollIntoView(); }, 500);
       }
     //console.log(this.details.replace(/\s+/g, ''), el);
     if(el == this.details.replace(/\s+/g, '')){
@@ -60,18 +60,10 @@ export default {
       
       axios.get('/search.php?s=' + this.details).then((response) => {
         this.detailsList = response.data.drinks;
-        window.localStorage.setItem(this.detailsList['strDrink'], JSON.stringify(response.data.drinks));
+        window.localStorage.setItem(this.details, JSON.stringify(response.data.drinks));
       }).catch( error => { console.log(error); });
     }
   },
-  computed: {
-    filteredList() {
-      return this.detailsList.filter(detail => {
-        return detail.strDrink.toLowerCase().includes(this.search.toLowerCase())
-      })
-      
-    }
-  }
 }
 </script>
 

@@ -5,10 +5,9 @@
       <p>We're sorry, we're not able to retrieve this information at the moment, please try back later</p>
     </section>
     <section v-else>
-    <p>Search: <input type="text" v-model="search" placeholder="Search title.."/></p>
       <div v-if="loading">Loading...</div>
       <div v-else v-for="categories in info" :key="categories.index">
-          <SearchComponent :category = "categories.strCategory" :details="details" :search = "search"/>
+          <SearchComponent :category = "categories.strCategory" :details="details"/>
       </div>
     </section>
   </div>
@@ -23,7 +22,6 @@ export default {
   name: 'Drink',
   data (){
     return {
-      search: '',
       info: null,
       loading: true,
       errored: false,
